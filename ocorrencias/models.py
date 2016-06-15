@@ -48,6 +48,7 @@ class Aeronave(models.Model):
 	quantidade_fatalidades = models.IntegerField(default=0)
 	dia_extracao = models.DateField()
 
+
 class FatorContribuinte(models.Model):
 	codigo_fator = models.IntegerField(primary_key=True)
 	codigo_ocorrencia = models.ForeignKey(Ocorrencia)

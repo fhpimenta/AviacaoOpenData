@@ -10,12 +10,12 @@ Para utilização do projeto é necessário ter o Python 3 e o Django instalado 
 
 Ao clonar o projeto, entre na pasta do projeto, e dê o seguinte comando:
 
-```python
+```sh
 $ python3 manage.py migrate
 ```
 
 Para acessar a aplicação, utilize o servidor web embutido no Django, com o seguinte comando:
 
-```python
+```sh
 $ python3 manage.py runserver
 ```

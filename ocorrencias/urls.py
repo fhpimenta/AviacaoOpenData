@@ -3,5 +3,7 @@ from . import views
 
 urlpatterns = [
 	url(r'^$', views.index),
-	url(r'^ocorrencias/ano', views.ocorrencias_por_ano),
+	url(r'^ocorrencias/ano$', views.ocorrencias_por_ano),
+	url(r'^ocorrencias/aeronave$', views.page_por_tipo_aeronave),
+	url(r'^ocorrencias/async/aeronave$', views.ocorrencias_por_tipo_aeronave),
 ]

@@ -1,0 +1,88 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Acidentes Aereos{% endblock %}
+
+{% block content %}   
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Dados Estatísticos por Tipo de Aeronave
+    <!-- <small>Control panel</small> -->
+  </h1>      
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">   
+    <div class="col-md-12">
+        <!-- BAR CHART -->
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Numero de Ocorrencias por Tipo de Aeronave</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <canvas id="barChartCanvas" style="height:230px"></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+    </div>
+  </div> <!-- /.row -->  
+</section>
+<!-- /.content -->
+      
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+  $(function() {
+    $.getJSON('/ocorrencias/async/aeronave')
+      .done(function(result) {    
+        // Chart JS
+        label = new Array();
+        dataChart = new Array();
+        for(i=0; i < result.length; i++) {
+          label.push(result[i][0]);
+          dataChart.push(result[i][1]);
+        }
+
+        var barData = {
+          type: 'horizontalBar',
+          labels: label,
+          datasets: [
+            {
+              label: "Tipo Aeronave",
+              backgroundColor: "rgba(46,216,32,0.2)",
+              borderColor: "rgba(46,216,32,1)",
+              borderWidth: 1,
+              hoverBackgroundColor: "rgba(46,216,32,0.5)",
+              hoverBorderColor: "rgba(46,216,32,1)",
+              data: dataChart,
+            }
+          ]
+        };
+
+        var ctx = $('#barChartCanvas').get(0).getContext('2d');
+        var barChart = new Chart(ctx, {
+          type: "horizontalBar",
+          data: barData,
+          options: {
+            tooltip: {
+              tooltipTemplate: "<%= value + '%' %>"  
+            }            
+          }
+        });
+        
+      });
+  });
+</script>
+{% endblock %}
