@@ -126,7 +126,7 @@ def add_fatores_contribuintes(apps, schema_editor):
 		if(row['detalhe_fator'] != ''):
 			fator.detalhe_fator = row['detalhe_fator']
 
-		fator.save()
+			fator.save()
 
 class Migration(migrations.Migration):
 

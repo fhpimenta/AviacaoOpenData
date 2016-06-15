@@ -4,30 +4,41 @@
 
 {% block content %}   
 
-      <div class="row">   
-      	<div class="col-md-6">
-	      	<!-- BAR CHART -->
-	          <div class="box box-success">
-	            <div class="box-header with-border">
-	              <h3 class="box-title">Numero de Ocorrencias nos Ultimos 10 anos</h3>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Dados Estatísticos
+    <!-- <small>Control panel</small> -->
+  </h1>      
+</section>
 
-	              <div class="box-tools pull-right">
-	                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-	                </button>
-	                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-	              </div>
-	            </div>
-	            <div class="box-body">
-	              <div class="chart">
-	                <canvas id="barChart" style="height:230px"></canvas>
-	              </div>
-	            </div>
-	            <!-- /.box-body -->
-	          </div>
-	          <!-- /.box -->
-      	</div>
-      </div> <!-- /.row -->     
+<!-- Main content -->
+<section class="content">
+  <div class="row">   
+  	<div class="col-md-6">
+      	<!-- BAR CHART -->
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Numero de Ocorrencias nos Ultimos 10 anos</h3>
 
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <canvas id="barChart" style="height:230px"></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+  	</div>
+  </div> <!-- /.row -->     
+</section>
+<!-- /.content -->
       
 {% endblock %}
 
