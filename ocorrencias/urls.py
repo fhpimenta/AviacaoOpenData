@@ -6,4 +6,5 @@ urlpatterns = [
 	url(r'^ocorrencias/ano$', views.ocorrencias_por_ano),
 	url(r'^ocorrencias/aeronave$', views.page_por_tipo_aeronave),
 	url(r'^ocorrencias/async/aeronave$', views.ocorrencias_por_tipo_aeronave),
+	url(r'^ocorrencias/historico$', views.page_historico),
 ]

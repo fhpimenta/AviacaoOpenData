@@ -54,6 +54,9 @@ def ocorrencias_por_tipo_aeronave(request):
 
 	return JsonResponse(retorno, safe=False)
 
+def page_historico(request):
+	return render(request, 'historico.html', {})
+
 
 def percentagem(valor, total):
 
