@@ -10,22 +10,26 @@ def index(request):
 	return render(request, 'index.html', {})
 
 def ocorrencias_por_ano(request):
-	resultados = {}
+	retorno = {}
 	anos = []
-	quant = []
+	quant_acidentes = []
+	quant_incidentes_graves = []
 
 	ano = 2006
 	for i in range(10):
-		ocorrencias = Ocorrencia.objects.filter(dia_ocorrencia__year=ano)
+		acidentes = Ocorrencia.objects.filter(dia_ocorrencia__year=ano,classificacao="ACIDENTE")
+		incidentes_graves = Ocorrencia.objects.filter(dia_ocorrencia__year=ano,classificacao="INCIDENTE GRAVE")
 		anos.append(ano)
-		quant.append(len(ocorrencias))
+		quant_acidentes.append(len(acidentes))
+		quant_incidentes_graves.append(len(incidentes_graves))
 
 		ano += 1
 
-	resultados['anos'] = anos
-	resultados['quant'] = quant
+	retorno['anos'] = anos
+	retorno['quant_acidentes'] = quant_acidentes
+	retorno['quant_incidentes_graves'] = quant_incidentes_graves
 
-	return JsonResponse(resultados, safe=False)
+	return JsonResponse(retorno, safe=False)
 
 def page_por_tipo_aeronave(request):
 	return render(request, 'ocorrencias_aeronave.html', {})
@@ -57,6 +61,28 @@ def ocorrencias_por_tipo_aeronave(request):
 def page_historico(request):
 	ocorrencias = Ocorrencia.objects.all()
 	return render(request, 'historico.html', {'ocorrencias': ocorrencias})
+
+def get_ocorrencias_historico(request):
+
+	ocorrencias = Ocorrencia.objects.all()	
+
+	if request.method == 'POST':
+		estado = request.POST['uf']
+		ano = int(request.POST['ano'])
+		if request.POST['uf'] != 0:
+			ocorrencias = ocorrencias.filter(uf=estado)
+		if request.POST['ano'] != 0:
+			ocorrencias = ocorrencias.filter(dia_ocorrencia__year=ano)
+
+	retorno = {'data':[]}
+	print(ocorrencias)
+	for oc in ocorrencias:
+		linha = []
+		linha = [oc.codigo_ocorrencia,oc.classificacao,oc.tipo,oc.localidade,oc.uf, "{:%d/%m/%Y}".format(oc.dia_ocorrencia)]
+		retorno['data'].append(linha)
+		
+
+	return JsonResponse(retorno, safe=False)
 
 
 def percentagem(valor, total):

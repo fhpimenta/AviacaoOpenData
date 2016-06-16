@@ -29,14 +29,35 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label>Estado</label>
-                <select class="form-control select2" style="width: 100%;">
-                  <option>Amapá</option>
-                  <option selected="selected">Maranhão</option>
-                  <option>São Paulo</option>
-                  <option>Rio de Janeiro</option>
-                  <option>Bahia</option>
-                  <option>Santa Catarina</option>
-                  <option>Ceará</option>
+                <select class="form-control select2" style="width: 100%;" name="uf" id="uf">
+                	<option selected="selected" value="0">Selecione</option>
+                  	<option value="AC">Acre</option>
+					<option value="AL">Alagoas</option>
+					<option value="AP">Amapá</option>
+					<option value="AM">Amazonas</option>
+					<option value="BA">Bahia</option>
+					<option value="CE">Ceará</option>
+					<option value="DF">Distrito Federal</option>
+					<option value="ES">Espirito Santo</option>
+					<option value="GO">Goiás</option>
+					<option value="MA">Maranhão</option>
+					<option value="MS">Mato Grosso do Sul</option>
+					<option value="MT">Mato Grosso</option>
+					<option value="MG">Minas Gerais</option>
+					<option value="PA">Pará</option>
+					<option value="PB">Paraíba</option>
+					<option value="PR">Paraná</option>
+					<option value="PE">Pernambuco</option>
+					<option value="PI">Piauí</option>
+					<option value="RJ">Rio de Janeiro</option>
+					<option value="RN">Rio Grande do Norte</option>
+					<option value="RS">Rio Grande do Sul</option>
+					<option value="RO">Rondônia</option>
+					<option value="RR">Roraima</option>
+					<option value="SC">Santa Catarina</option>
+					<option value="SP">São Paulo</option>
+					<option value="SE">Sergipe</option>
+					<option value="TO">Tocantins</option>
                 </select>
               </div>
               <!-- /.form-group -->              
@@ -45,22 +66,27 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label>Ano</label>
-                <select class="form-control select2" style="width: 100%;">
-                  <option>2006</option>
-                  <option>2007</option>
-                  <option>2008</option>
-                  <option>2009</option>
-                  <option>2010</option>
-                  <option>2011</option>
-                  <option>2012</option>
-                  <option>2013</option>
-                  <option>2014</option>
-                  <option selected="selected">2015</option>
+                <select class="form-control select2" style="width: 100%;" name="ano" id="ano">
+                  <option selected="selected" value="0">Selecione</option>
+                  <option value="2006">2006</option>
+                  <option value="2007">2007</option>
+                  <option value="2008">2008</option>
+                  <option value="2009">2009</option>
+                  <option value="2010">2010</option>
+                  <option value="2011">2011</option>
+                  <option value="2012">2012</option>
+                  <option value="2013">2013</option>
+                  <option value="2014">2014</option>
+                  <option value="2015">2015</option>
                 </select>
               </div>
               <!-- /.form-group -->              
             </div>
-            <!-- /.col -->              
+            <!-- /.col -->
+            <div class="col-md-2">
+            	<label></label>
+            	<button type="button" class="btn btn-block btn-primary" id="btnLocalizar"><i class="fa fa-search"></i> Localizar</button>
+            </div>           
           </div>
           <!-- /.row -->
         </div>
@@ -84,19 +110,7 @@
               <th>Estado</th>
               <th>Dia da Ocorrência</th>
             </tr>
-            </thead>
-            <tbody>
-              {% for oc in ocorrencias %}
-                <tr>
-                  <td>{{ oc.codigo_ocorrencia }}</td>
-                  <td>{{ oc.classificacao }}</td>
-                  <td>{{ oc.tipo }}</td>
-                  <td>{{ oc.localidade }}</td>
-                  <td>{{ oc.uf }}</td>
-                  <td>{{ oc.dia_ocorrencia }}</td>
-                </tr>
-              {% endfor %}
-            </tbody>
+            </thead>            
             <tfoot>
             <tr>
               <th>Código</th>
@@ -112,10 +126,7 @@
         <!-- /.box-body -->
       </div>
       <!-- /.box -->
-    </div>
-    <!-- /.col-xs-12 -->
-  </div>
-  <!-- /.row -->
+      
 </section>
 <!-- /.content -->
 {% endblock content %}
@@ -127,7 +138,58 @@
     	$(".select2").select2();
 
       //Data Table
-      $("#example1").DataTable();
+      var table = $("#example1").DataTable({      	
+      	"ajax": "/ocorrencias/async/historico",
+      	"destroy": true
+      });      
+
+      $('#btnLocalizar').click(function() {
+      	var state = $('#uf').val();
+      	var year = $('#ano').val();
+      	var csrftoken = $.cookie('csrftoken');
+      	console.log("Estado:"+state+" Ano:"+year);
+      	if(state != 0 || year != 0){
+	      	$.ajax({
+	      		method: "POST",
+	      		url: "/ocorrencias/async/historico",
+	      		data: {uf: state, ano: year},
+	      		beforeSend: function(xhr, settings) {
+			        if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+			            // Send the token to same-origin, relative URLs only.
+			            // Send the token only if the method warrants CSRF protection
+			            // Using the CSRFToken value acquired earlier
+			            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+			        }
+			    }
+	      	}).done(function(dataResponse) {
+	      		console.log(dataResponse.data);
+	      		
+	      		table.destroy();
+	      		table = $("#example1").DataTable({
+	      			data: dataResponse.data,
+	      			destroy: true
+	      		});
+	      	});
+      	}
+      });
+
+  	function csrfSafeMethod(method) {
+	    // these HTTP methods do not require CSRF protection
+	    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+	}
+	function sameOrigin(url) {
+	    // test that a given url is a same-origin URL
+	    // url could be relative or scheme relative or absolute
+	    var host = document.location.host; // host + port
+	    var protocol = document.location.protocol;
+	    var sr_origin = '//' + host;
+	    var origin = protocol + sr_origin;
+	    // Allow absolute or scheme relative URLs to same origin
+	    return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+	        (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+	        // or any other URL that isn't scheme relative or absolute i.e relative.
+	        !(/^(\/\/|http:|https:).*/.test(url));
+	}
 	});	
 </script>
 {% endblock scripts %}
