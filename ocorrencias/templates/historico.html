@@ -11,121 +11,125 @@
 
 <!-- Main content -->
 <section class="content">
-  <div class="row">
-    <div class="col-xs-12">
-      <!-- SELECT2 EXAMPLE -->
-      <div class="box box-default">
-        <div class="box-header with-border">
-          <h3 class="box-title">Localizar Histórico</h3>
+	<div class="row">
+	    <div class="col-xs-12">
+			<!-- SELECT2 EXAMPLE -->
+			<div class="box box-default">
+			<div class="box-header with-border">
+			  <h3 class="box-title">Localizar Histórico</h3>
 
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
-          </div>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Estado</label>
-                <select class="form-control select2" style="width: 100%;" name="uf" id="uf">
-                	<option selected="selected" value="0">Selecione</option>
-                  	<option value="AC">Acre</option>
-					<option value="AL">Alagoas</option>
-					<option value="AP">Amapá</option>
-					<option value="AM">Amazonas</option>
-					<option value="BA">Bahia</option>
-					<option value="CE">Ceará</option>
-					<option value="DF">Distrito Federal</option>
-					<option value="ES">Espirito Santo</option>
-					<option value="GO">Goiás</option>
-					<option value="MA">Maranhão</option>
-					<option value="MS">Mato Grosso do Sul</option>
-					<option value="MT">Mato Grosso</option>
-					<option value="MG">Minas Gerais</option>
-					<option value="PA">Pará</option>
-					<option value="PB">Paraíba</option>
-					<option value="PR">Paraná</option>
-					<option value="PE">Pernambuco</option>
-					<option value="PI">Piauí</option>
-					<option value="RJ">Rio de Janeiro</option>
-					<option value="RN">Rio Grande do Norte</option>
-					<option value="RS">Rio Grande do Sul</option>
-					<option value="RO">Rondônia</option>
-					<option value="RR">Roraima</option>
-					<option value="SC">Santa Catarina</option>
-					<option value="SP">São Paulo</option>
-					<option value="SE">Sergipe</option>
-					<option value="TO">Tocantins</option>
-                </select>
-              </div>
-              <!-- /.form-group -->              
-            </div>
-            <!-- /.col --> 
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Ano</label>
-                <select class="form-control select2" style="width: 100%;" name="ano" id="ano">
-                  <option selected="selected" value="0">Selecione</option>
-                  <option value="2006">2006</option>
-                  <option value="2007">2007</option>
-                  <option value="2008">2008</option>
-                  <option value="2009">2009</option>
-                  <option value="2010">2010</option>
-                  <option value="2011">2011</option>
-                  <option value="2012">2012</option>
-                  <option value="2013">2013</option>
-                  <option value="2014">2014</option>
-                  <option value="2015">2015</option>
-                </select>
-              </div>
-              <!-- /.form-group -->              
-            </div>
-            <!-- /.col -->
-            <div class="col-md-2">
-            	<label></label>
-            	<button type="button" class="btn btn-block btn-primary" id="btnLocalizar"><i class="fa fa-search"></i> Localizar</button>
-            </div>           
-          </div>
-          <!-- /.row -->
-        </div>
-        <!-- /.box-body -->        
-      </div>
-      <!-- /.box -->
+			  <div class="box-tools pull-right">
+			    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+			    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+			  </div>
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body">
+			  <div class="row">
+			    <div class="col-md-4">
+			      <div class="form-group">
+			        <label>Estado</label>
+			        <select class="form-control select2" style="width: 100%;" name="uf" id="uf">
+			        	<option selected="selected" value="0">Selecione</option>
+			          	<option value="AC">Acre</option>
+						<option value="AL">Alagoas</option>
+						<option value="AP">Amapá</option>
+						<option value="AM">Amazonas</option>
+						<option value="BA">Bahia</option>
+						<option value="CE">Ceará</option>
+						<option value="DF">Distrito Federal</option>
+						<option value="ES">Espirito Santo</option>
+						<option value="GO">Goiás</option>
+						<option value="MA">Maranhão</option>
+						<option value="MS">Mato Grosso do Sul</option>
+						<option value="MT">Mato Grosso</option>
+						<option value="MG">Minas Gerais</option>
+						<option value="PA">Pará</option>
+						<option value="PB">Paraíba</option>
+						<option value="PR">Paraná</option>
+						<option value="PE">Pernambuco</option>
+						<option value="PI">Piauí</option>
+						<option value="RJ">Rio de Janeiro</option>
+						<option value="RN">Rio Grande do Norte</option>
+						<option value="RS">Rio Grande do Sul</option>
+						<option value="RO">Rondônia</option>
+						<option value="RR">Roraima</option>
+						<option value="SC">Santa Catarina</option>
+						<option value="SP">São Paulo</option>
+						<option value="SE">Sergipe</option>
+						<option value="TO">Tocantins</option>
+			        </select>
+			      </div>
+			      <!-- /.form-group -->              
+			    </div>
+			    <!-- /.col --> 
+			    <div class="col-md-4">
+			      <div class="form-group">
+			        <label>Ano</label>
+			        <select class="form-control select2" style="width: 100%;" name="ano" id="ano">
+			          <option selected="selected" value="0">Selecione</option>
+			          <option value="2006">2006</option>
+			          <option value="2007">2007</option>
+			          <option value="2008">2008</option>
+			          <option value="2009">2009</option>
+			          <option value="2010">2010</option>
+			          <option value="2011">2011</option>
+			          <option value="2012">2012</option>
+			          <option value="2013">2013</option>
+			          <option value="2014">2014</option>
+			          <option value="2015">2015</option>
+			        </select>
+			      </div>
+			      <!-- /.form-group -->              
+			    </div>
+			    <!-- /.col -->
+			    <div class="col-md-2">
+			    	<label></label>
+			    	<button type="button" class="btn btn-block btn-primary" id="btnLocalizar"><i class="fa fa-search"></i> Localizar</button>
+			    </div>           
+			  </div>
+			  <!-- /.row -->
+			</div>
+			<!-- /.box-body -->        
+			</div>
+			<!-- /.box -->
 
-      <div class="box">
-        <div class="box-header">
-          <h3 class="box-title">Histórico</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-          <table id="example1" class="table table-bordered table-striped">
-            <thead>
-            <tr>
-              <th>Código</th>
-              <th>Classificacao</th>
-              <th>Tipo</th>
-              <th>Localidade</th>
-              <th>Estado</th>
-              <th>Dia da Ocorrência</th>
-            </tr>
-            </thead>            
-            <tfoot>
-            <tr>
-              <th>Código</th>
-              <th>Classificacao</th>
-              <th>Tipo</th>
-              <th>Localidade</th>
-              <th>Estado</th>
-              <th>Dia da Ocorrência</th>
-            </tr>
-            </tfoot>
-          </table>
-        </div>
-        <!-- /.box-body -->
-      </div>
-      <!-- /.box -->
+			<div class="box">
+			<div class="box-header">
+			  <h3 class="box-title">Histórico</h3>
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body">
+			  <table id="example1" class="table table-bordered table-striped">
+			    <thead>
+			    <tr>
+			      <th>Código</th>
+			      <th>Classificacao</th>
+			      <th>Tipo</th>
+			      <th>Localidade</th>
+			      <th>Estado</th>
+			      <th>Dia da Ocorrência</th>
+			    </tr>
+			    </thead>            
+			    <tfoot>
+			    <tr>
+			      <th>Código</th>
+			      <th>Classificacao</th>
+			      <th>Tipo</th>
+			      <th>Localidade</th>
+			      <th>Estado</th>
+			      <th>Dia da Ocorrência</th>
+			    </tr>
+			    </tfoot>
+			  </table>
+			</div>
+			<!-- /.box-body -->
+			</div>
+			<!-- /.box -->
+		</div>
+		<!-- /.col -->
+	</div>
+	<!-- /.row -->
       
 </section>
 <!-- /.content -->

@@ -1,0 +1,166 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Acidentes Aereos{% endblock %}
+
+{% block content %}   
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Dados Estatísticos por Tipo de Aeronave
+    <!-- <small>Control panel</small> -->
+  </h1>      
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">   
+    <div class="col-xs-12">
+
+      <!-- Box Localizar -->
+      <div class="box box-default">
+      <div class="box-header with-border">
+        <h3 class="box-title">Localizar Histórico</h3>
+
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+        </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Estado</label>
+              <select class="form-control select2" style="width: 100%;" name="uf" id="uf">
+                <option selected="selected" value="0">Selecione</option>
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espirito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernambuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
+              </select>
+            </div>
+            <!-- /.form-group -->              
+          </div>
+          <!-- /.col -->           
+          <div class="col-md-2">
+            <label></label>
+            <button type="button" class="btn btn-block btn-primary" id="btnLocalizar"><i class="fa fa-search"></i> Localizar</button>
+          </div>
+          <!-- /.col -->        
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.box-body -->        
+      </div>
+      <!-- /.box -->
+
+      <div class="box hidden" id="boxBarChart">
+        <div class="box-header with-border">
+          <h3 class="box-title">Numero de Ocorrencias nos Ultimos 10 anos</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+          <!-- ./box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="chart">
+            <canvas id="barChart" style="height:230px"></canvas>
+          </div>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+    <!-- /.col -->
+  </div> <!-- /.row -->  
+</section>
+<!-- /.content -->
+      
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+  $(function() {
+    // Select2
+    $('.select2').select2();
+
+    // Bar Chart
+    $("#btnLocalizar").click(function() {
+      var state = $('#uf').val();
+    $('#boxBarChart').removeClass('hidden');
+    $.get('/ocorrencias/async/estado', {uf: state})
+    .done(function(data) {
+      console.log(data);
+      //-------------
+        //- BAR CHART -
+        //-------------
+
+        var areaChartData = {
+          labels: data.anos,
+          datasets: [
+            {
+              label: "Acidentes",
+              backgroundColor: "rgba(212,34,21,0.8)",
+                borderColor: "rgba(212,34,21,1)",
+                borderWidth: 1,
+                hoverBackgroundColor: "rgba(212,34,21,1)",
+                hoverBorderColor: "rgba(212,34,21,1)",
+              data: data.quant_acidentes
+            },
+            {
+              label: "Incidentes Graves",
+              backgroundColor: "rgba(212,107,21,0.8)",
+                borderColor: "rgba(212,107,21,1)",
+                borderWidth: 1,
+                hoverBackgroundColor: "rgba(212,107,21,1)",
+                hoverBorderColor: "rgba(212,107,21,1)",
+              data: data.quant_incidentes_graves
+            }    
+          ]
+        };
+
+        var barChartCanvas = $("#barChart").get(0).getContext("2d");
+        var barChart = new Chart(barChartCanvas, {
+          type: 'bar',
+          data: areaChartData,
+          options: {}
+        });
+        
+    })
+    .fail(function() {
+      console.log("Falha na operação");
+    });
+  });
+    });
+    
+</script>
+{% endblock %}

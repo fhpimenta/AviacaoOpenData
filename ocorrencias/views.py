@@ -34,6 +34,9 @@ def ocorrencias_por_ano(request):
 def page_por_tipo_aeronave(request):
 	return render(request, 'ocorrencias_aeronave.html', {})
 
+def page_ocorrencias_por_estado(request):
+	return render(request, 'ocorrencias_estado.html', {})
+
 def ocorrencias_por_tipo_aeronave(request):
 	tipos_aeronaves = ['AVIÃO', 'HELICÓPTERO', 'PLANADOR', 'ANFÍBIO', 'ULTRALEVE', 'EXPERIMENTAL']
 	quant_tipo = []
@@ -84,7 +87,29 @@ def get_ocorrencias_historico(request):
 
 	return JsonResponse(retorno, safe=False)
 
+def get_ocorrencias_estado(request):
+	uf = request.GET['uf']
+
+	retorno = {}
+	anos = []
+	quant_acidentes = []
+	quant_incidentes_graves = []
+
+	ano = 2006
+	for i in range(10):
+		acidentes = Ocorrencia.objects.filter(dia_ocorrencia__year=ano,classificacao="ACIDENTE",uf=uf)
+		incidentes_graves = Ocorrencia.objects.filter(dia_ocorrencia__year=ano,classificacao="INCIDENTE GRAVE",uf=uf)
+		anos.append(ano)
+		quant_acidentes.append(len(acidentes))
+		quant_incidentes_graves.append(len(incidentes_graves))
+
+		ano += 1
+
+	retorno['anos'] = anos
+	retorno['quant_acidentes'] = quant_acidentes
+	retorno['quant_incidentes_graves'] = quant_incidentes_graves
+
+	return JsonResponse(retorno, safe=False)
 
 def percentagem(valor, total):
-
 	return float((valor*100)/total)
