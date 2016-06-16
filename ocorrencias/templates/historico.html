@@ -11,10 +11,12 @@
 
 <!-- Main content -->
 <section class="content">
-  <!-- SELECT2 EXAMPLE -->
+  <div class="row">
+    <div class="col-xs-12">
+      <!-- SELECT2 EXAMPLE -->
       <div class="box box-default">
         <div class="box-header with-border">
-          <h3 class="box-title">Select2</h3>
+          <h3 class="box-title">Localizar Histórico</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -24,28 +26,96 @@
         <!-- /.box-header -->
         <div class="box-body">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
               <div class="form-group">
-                <label>Minimal</label>
+                <label>Estado</label>
                 <select class="form-control select2" style="width: 100%;">
-                  <option selected="selected">Alabama</option>
-                  <option>Alaska</option>
-                  <option>California</option>
-                  <option>Delaware</option>
-                  <option>Tennessee</option>
-                  <option>Texas</option>
-                  <option>Washington</option>
+                  <option>Amapá</option>
+                  <option selected="selected">Maranhão</option>
+                  <option>São Paulo</option>
+                  <option>Rio de Janeiro</option>
+                  <option>Bahia</option>
+                  <option>Santa Catarina</option>
+                  <option>Ceará</option>
                 </select>
               </div>
               <!-- /.form-group -->              
             </div>
-            <!-- /.col -->           
+            <!-- /.col --> 
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Ano</label>
+                <select class="form-control select2" style="width: 100%;">
+                  <option>2006</option>
+                  <option>2007</option>
+                  <option>2008</option>
+                  <option>2009</option>
+                  <option>2010</option>
+                  <option>2011</option>
+                  <option>2012</option>
+                  <option>2013</option>
+                  <option>2014</option>
+                  <option selected="selected">2015</option>
+                </select>
+              </div>
+              <!-- /.form-group -->              
+            </div>
+            <!-- /.col -->              
           </div>
           <!-- /.row -->
         </div>
         <!-- /.box-body -->        
       </div>
       <!-- /.box -->
+
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Histórico</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <table id="example1" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <th>Código</th>
+              <th>Classificacao</th>
+              <th>Tipo</th>
+              <th>Localidade</th>
+              <th>Estado</th>
+              <th>Dia da Ocorrência</th>
+            </tr>
+            </thead>
+            <tbody>
+              {% for oc in ocorrencias %}
+                <tr>
+                  <td>{{ oc.codigo_ocorrencia }}</td>
+                  <td>{{ oc.classificacao }}</td>
+                  <td>{{ oc.tipo }}</td>
+                  <td>{{ oc.localidade }}</td>
+                  <td>{{ oc.uf }}</td>
+                  <td>{{ oc.dia_ocorrencia }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+              <th>Código</th>
+              <th>Classificacao</th>
+              <th>Tipo</th>
+              <th>Localidade</th>
+              <th>Estado</th>
+              <th>Dia da Ocorrência</th>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+    <!-- /.col-xs-12 -->
+  </div>
+  <!-- /.row -->
 </section>
 <!-- /.content -->
 {% endblock content %}
@@ -55,6 +125,9 @@
 	$(function() {
 		//Initialize Select2 Elements
     	$(".select2").select2();
+
+      //Data Table
+      $("#example1").DataTable();
 	});	
 </script>
 {% endblock scripts %}

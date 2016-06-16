@@ -75,7 +75,8 @@ $(function() {
 		    var barChartData = areaChartData;
 		    barChartData.datasets[0].fillColor = "#00a65a";
 		    barChartData.datasets[0].strokeColor = "#00a65a";
-		    barChartData.datasets[0].pointColor = "#00a65a";		    
+		    barChartData.datasets[0].pointColor = "#00a65a";
+		    /*		    
 		    var barChartOptions = {
 		      //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
 		      scaleBeginAtZero: true,
@@ -101,7 +102,8 @@ $(function() {
 		      responsive: true,
 		      maintainAspectRatio: true
 		    };
-
+			*/
+			var barChartOptions = {}
 		    barChartOptions.datasetFill = false;
 		    barChart.Bar(barChartData, barChartOptions);
 		})
