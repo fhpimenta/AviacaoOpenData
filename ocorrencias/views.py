@@ -111,5 +111,60 @@ def get_ocorrencias_estado(request):
 
 	return JsonResponse(retorno, safe=False)
 
+def get_relatorio_ocorrencias_estados(request):
+
+	estados = {
+		"AC": "Acre",
+		"AL": "Alagoas",
+		"AP": "Amapá",
+		"AM": "Amazonas",
+		"BA": "Bahia",
+		"CE": "Ceará",
+		"DF": "Distrito Federal",
+		"ES": "Espirito Santo",
+		"GO": "Goiás",
+		"MA": "Maranhão",
+		"MT": "Mato Grosso",
+		"MS": "Mato Grosso do Sul",
+		"MG": "Minas Gerais",
+		"PA": "Pará",
+		"PB": "Paraíba",
+		"PR": "Paraná",
+		"PE": "Pernambuco",
+		"PI": "Piauí",
+		"RJ": "Rio de Janeiro",
+		"RN": "Rio Grande do Norte",
+		"RS": "Rio Grande do Sul",
+		"RO": "Rondônia",
+		"RR": "Roraima",
+		"SC": "Santa Catarina",
+		"SP": "São Paulo",
+		"SE": "Sergipe",
+		"TO": "Tocantins"
+	}
+
+	total_ocorrencias = 0
+	retorno = {}
+	arrEstados = []
+	arrQuant = []
+	for uf in estados.keys():
+		quant = Ocorrencia.objects.filter(uf=uf).count()
+		arrEstados.append(estados[uf])
+		arrQuant.append(quant)
+		total_ocorrencias += quant
+
+	# calcular porcentagem por estado
+	for i in range(len(arrQuant)):
+		# calcular a porcentagem de ocorrencias de cada tipo
+		percent = percentagem(arrQuant[i], total_ocorrencias)
+		percent = Decimal(str(percent)).quantize(Decimal('1.0'))
+
+		arrQuant[i] = float(percent)
+
+	retorno['estados'] = arrEstados
+	retorno['quant'] = arrQuant
+
+	return JsonResponse(retorno, safe=False)
+
 def percentagem(valor, total):
 	return float((valor*100)/total)

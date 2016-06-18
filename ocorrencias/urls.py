@@ -12,4 +12,5 @@ urlpatterns = [
 	url(r'^ocorrencias/async/historico$', views.get_ocorrencias_historico),
 	url(r'^ocorrencias/async/aeronave$', views.ocorrencias_por_tipo_aeronave),
 	url(r'^ocorrencias/async/estado$', views.get_ocorrencias_estado),
+	url(r'^ocorrencias/async/geral/estados$', views.get_relatorio_ocorrencias_estados),
 ]

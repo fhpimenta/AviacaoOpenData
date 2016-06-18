@@ -7,101 +7,162 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Dados Estatísticos por Tipo de Aeronave
+    Dados Estatísticos por Estados
     <!-- <small>Control panel</small> -->
   </h1>      
 </section>
 
 <!-- Main content -->
 <section class="content">
-  <div class="row">   
-    <div class="col-xs-12">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="nav-tabs-custom">
+        <!-- Tabs -->
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#geral" data-toggle="tab">Geral</a></li>
+          <li><a href="#localizar" data-toggle="tab">Localizar</a></li>
+        </ul>
 
-      <!-- Box Localizar -->
-      <div class="box box-default">
-      <div class="box-header with-border">
-        <h3 class="box-title">Localizar Histórico</h3>
+        <!-- Tab Panes -->
+        <div class="tab-content">
+          <div class="tab-pane active" id="geral">
+            <div class="row">
+                <div class="col-md-12">
+                  <div class="box" id="boxBarChartGeral">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Numero de Ocorrencias nos Ultimos 10 anos</h3>
 
-        <div class="box-tools pull-right">
-          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
-        </div>
-      </div>
-      <!-- /.box-header -->
-      <div class="box-body">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Estado</label>
-              <select class="form-control select2" style="width: 100%;" name="uf" id="uf">
-                <option selected="selected" value="0">Selecione</option>
-                <option value="AC">Acre</option>
-                <option value="AL">Alagoas</option>
-                <option value="AP">Amapá</option>
-                <option value="AM">Amazonas</option>
-                <option value="BA">Bahia</option>
-                <option value="CE">Ceará</option>
-                <option value="DF">Distrito Federal</option>
-                <option value="ES">Espirito Santo</option>
-                <option value="GO">Goiás</option>
-                <option value="MA">Maranhão</option>
-                <option value="MS">Mato Grosso do Sul</option>
-                <option value="MT">Mato Grosso</option>
-                <option value="MG">Minas Gerais</option>
-                <option value="PA">Pará</option>
-                <option value="PB">Paraíba</option>
-                <option value="PR">Paraná</option>
-                <option value="PE">Pernambuco</option>
-                <option value="PI">Piauí</option>
-                <option value="RJ">Rio de Janeiro</option>
-                <option value="RN">Rio Grande do Norte</option>
-                <option value="RS">Rio Grande do Sul</option>
-                <option value="RO">Rondônia</option>
-                <option value="RR">Roraima</option>
-                <option value="SC">Santa Catarina</option>
-                <option value="SP">São Paulo</option>
-                <option value="SE">Sergipe</option>
-                <option value="TO">Tocantins</option>
-              </select>
-            </div>
-            <!-- /.form-group -->              
-          </div>
-          <!-- /.col -->           
-          <div class="col-md-2">
-            <label></label>
-            <button type="button" class="btn btn-block btn-primary" id="btnLocalizar"><i class="fa fa-search"></i> Localizar</button>
-          </div>
-          <!-- /.col -->        
-        </div>
-        <!-- /.row -->
-      </div>
-      <!-- /.box-body -->        
-      </div>
-      <!-- /.box -->
+                      <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                      </div>
+                      <!-- ./box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                      <div class="chart">
+                        <canvas id="barChartGeral" style="height:230px"></canvas>
+                      </div>
+                    </div>
+                    <!-- /.box-body -->
+                  </div>
+                  <!-- /.box -->
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+          </div>  
+          <!-- /.tab-pane -->
 
-      <div class="box hidden" id="boxBarChart">
-        <div class="box-header with-border">
-          <h3 class="box-title">Numero de Ocorrencias nos Ultimos 10 anos</h3>
+          <div class="tab-pane" id="localizar">
+            
+              <div class="row">   
+                <div class="col-xs-12">
 
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  <!-- Box Localizar -->
+                  <div class="box box-success box-solid">
+                  <div class="box-header with-border">
+                    <h3 class="box-title">Localizar Histórico</h3>
+
+                    <div class="box-tools pull-right">
+                      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                      <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+                    </div>
+                  </div>
+                  <!-- /.box-header -->
+                  <div class="box-body">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label>Estado</label>
+                          <select class="form-control select2" style="width: 100%;" name="uf" id="uf">
+                            <option selected="selected" value="0">Selecione</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espirito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                          </select>
+                        </div>
+                        <!-- /.form-group -->              
+                      </div>
+                      <!-- /.col -->           
+                      <div class="col-md-2">
+                        <label></label>
+                        <button type="button" class="btn btn-block btn-primary" id="btnLocalizar"><i class="fa fa-search"></i> Localizar</button>
+                      </div>
+                      <!-- /.col -->        
+                    </div>
+                    <!-- /.row -->
+                  </div>
+                  <!-- /.box-body -->        
+                  </div>
+                  <!-- /.box -->      
+                </div>
+                <!-- /.col -->
+                </div> 
+                <!-- /.row -->
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="box hidden" id="boxBarChart">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Numero de Ocorrencias nos Ultimos 10 anos</h3>
+
+                      <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                      </div>
+                      <!-- ./box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                      <div class="chart">
+                        <canvas id="barChart" style="height:230px"></canvas>
+                      </div>
+                    </div>
+                    <!-- /.box-body -->
+                  </div>
+                  <!-- /.box -->
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            
           </div>
-          <!-- ./box-tools -->
+          <!-- /.tab-panel -->
         </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-          <div class="chart">
-            <canvas id="barChart" style="height:230px"></canvas>
-          </div>
-        </div>
-        <!-- /.box-body -->
+        <!-- /.tab-content -->
       </div>
-      <!-- /.box -->
+      <!-- /.nav-tabs-custom -->
     </div>
     <!-- /.col -->
-  </div> <!-- /.row -->  
+  </div>
+  <!-- /.row -->
 </section>
 <!-- /.content -->
       
@@ -113,14 +174,20 @@
     // Select2
     $('.select2').select2();
 
-    // Bar Chart
+    // Bar Chart    
+    var barChartLocalizar = null;
     $("#btnLocalizar").click(function() {
       var state = $('#uf').val();
-    $('#boxBarChart').removeClass('hidden');
-    $.get('/ocorrencias/async/estado', {uf: state})
-    .done(function(data) {
-      console.log(data);
-      //-------------
+      $('#boxBarChart').removeClass('hidden');
+      
+      if(barChartLocalizar != null) {
+        barChartLocalizar.destroy();
+      }
+
+      $.get('/ocorrencias/async/estado', {uf: state})
+      .done(function(data) {
+        console.log(data);
+        //-------------
         //- BAR CHART -
         //-------------
 
@@ -130,26 +197,26 @@
             {
               label: "Acidentes",
               backgroundColor: "rgba(212,34,21,0.8)",
-                borderColor: "rgba(212,34,21,1)",
-                borderWidth: 1,
-                hoverBackgroundColor: "rgba(212,34,21,1)",
-                hoverBorderColor: "rgba(212,34,21,1)",
+              borderColor: "rgba(212,34,21,1)",
+              borderWidth: 1,
+              hoverBackgroundColor: "rgba(212,34,21,1)",
+              hoverBorderColor: "rgba(212,34,21,1)",
               data: data.quant_acidentes
             },
             {
               label: "Incidentes Graves",
               backgroundColor: "rgba(212,107,21,0.8)",
-                borderColor: "rgba(212,107,21,1)",
-                borderWidth: 1,
-                hoverBackgroundColor: "rgba(212,107,21,1)",
-                hoverBorderColor: "rgba(212,107,21,1)",
+              borderColor: "rgba(212,107,21,1)",
+              borderWidth: 1,
+              hoverBackgroundColor: "rgba(212,107,21,1)",
+              hoverBorderColor: "rgba(212,107,21,1)",
               data: data.quant_incidentes_graves
             }    
           ]
         };
 
         var barChartCanvas = $("#barChart").get(0).getContext("2d");
-        var barChart = new Chart(barChartCanvas, {
+        barChartLocalizar = new Chart(barChartCanvas, {
           type: 'bar',
           data: areaChartData,
           options: {}
@@ -160,7 +227,32 @@
       console.log("Falha na operação");
     });
   });
+
+    // Grafico Geral de Acidentes por estado
+    $.getJSON('/ocorrencias/async/geral/estados', function(retorno) {
+      var barChartData = {
+        labels: retorno.estados,
+        datasets: [
+          {
+            label: 'Ocorrências',
+            backgroundColor: "rgba(212,34,21,0.8)",
+            borderColor: "rgba(212,34,21,1)",
+            borderWidth: 1,
+            hoverBackgroundColor: "rgba(212,34,21,1)",
+            hoverBorderColor: "rgba(212,34,21,1)",
+            data: retorno.quant
+          }
+        ]
+      };
+
+      var canvas = $("#barChartGeral").get(0).getContext("2d");
+      var chart = new Chart(canvas, {
+        type: 'bar',
+        data: barChartData,
+        options: {}
+      });
     });
+});
     
 </script>
 {% endblock %}
