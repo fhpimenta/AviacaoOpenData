@@ -178,6 +178,10 @@ def get_relatorio_ocorrencias_estados(request):
 
 	return JsonResponse(retorno, safe=False)
 
+def show_ocorrencia(request, codigo):
+	ocorrencia = Ocorrencia.objects.get(pk=codigo)
+	return render(request, 'ocorrencia_show.html', {'ocorrencia': ocorrencia})
+
 def percentagem(valor, total):
 	return float((valor*100)/total)
 

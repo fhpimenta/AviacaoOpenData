@@ -8,6 +8,7 @@ urlpatterns = [
 	url(r'^ocorrencias/historico$', views.page_historico),
 	url(r'^ocorrencias/estado$', views.page_ocorrencias_por_estado),
 	url(r'^ocorrencias/geral$', views.page_ocorrencias_geral),
+	url(r'^ocorrencias/show/(?P<codigo>[0-9]{5})/$', views.show_ocorrencia),
 
 	# urls async
 	url(r'^ocorrencias/async/historico$', views.get_ocorrencias_historico),
