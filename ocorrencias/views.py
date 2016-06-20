@@ -37,6 +37,9 @@ def page_por_tipo_aeronave(request):
 def page_ocorrencias_por_estado(request):
 	return render(request, 'ocorrencias_estado.html', {})
 
+def page_ocorrencias_geral(request):
+	return render(request, 'ocorrencias_geral.html', {})
+
 def ocorrencias_por_tipo_aeronave(request):
 	tipos_aeronaves = ['AVIÃO', 'HELICÓPTERO', 'PLANADOR', 'ANFÍBIO', 'ULTRALEVE', 'EXPERIMENTAL']
 	quant_tipo = []
@@ -55,9 +58,7 @@ def ocorrencias_por_tipo_aeronave(request):
 
 		resultados[tipos_aeronaves[i]] = float(percent)
 
-	items = [(v,k) for k,v in resultados.items()]
-	items.sort()
-	retorno = [(k,v) for v,k in items]
+	retorno = sort_dict(resultados)
 
 	return JsonResponse(retorno, safe=False)
 
@@ -82,6 +83,15 @@ def get_ocorrencias_historico(request):
 	for oc in ocorrencias:
 		linha = []
 		linha = [oc.codigo_ocorrencia,oc.classificacao,oc.tipo,oc.localidade,oc.uf, "{:%d/%m/%Y}".format(oc.dia_ocorrencia)]
+		linha.append('<a class="btn btn-primary" href="/ocorrencias/show/'+str(oc.codigo_ocorrencia)+'"><i class="fa fa-eye"></i></a>')
+		#linha = {}
+		#linha['codigo'] = oc.codigo_ocorrencia
+		#linha['classificacao'] = oc.classificacao
+		#linha['tipo'] = oc.tipo
+		#linha['localidade'] = oc.localidade
+		#linha['estado'] = oc.estado
+		#linha['diaDaOcorrencia'] = "{:%d/%m/%Y}".format(oc.dia_ocorrencia)
+		#linha['opcoes'] = "<a class='btn btn-primary' href='#'></a>"
 		retorno['data'].append(linha)
 		
 
@@ -148,7 +158,7 @@ def get_relatorio_ocorrencias_estados(request):
 	arrEstados = []
 	arrQuant = []
 	for uf in estados.keys():
-		quant = Ocorrencia.objects.filter(uf=uf).count()
+		quant = Ocorrencia.objects.filter(uf=uf, dia_ocorrencia__year__range=(2006,2015)).count()
 		arrEstados.append(estados[uf])
 		arrQuant.append(quant)
 		total_ocorrencias += quant
@@ -159,12 +169,25 @@ def get_relatorio_ocorrencias_estados(request):
 		percent = percentagem(arrQuant[i], total_ocorrencias)
 		percent = Decimal(str(percent)).quantize(Decimal('1.0'))
 
-		arrQuant[i] = float(percent)
+		#arrQuant[i] = float(percent)
+		retorno[arrEstados[i]] = float(percent)
 
-	retorno['estados'] = arrEstados
-	retorno['quant'] = arrQuant
+	#retorno['estados'] = arrEstados
+	#retorno['quant'] = arrQuant
+	retorno = sort_dict(retorno)
 
 	return JsonResponse(retorno, safe=False)
 
 def percentagem(valor, total):
 	return float((valor*100)/total)
+
+def sort_dict(dictionary,order='desc'):
+	items = [(v,k) for k,v in dictionary.items()]
+	if(order == 'desc'):
+		items.sort(reverse=True)
+	else:
+		items.sort()
+	
+	retorno = [(k,v) for v,k in items]
+
+	return retorno

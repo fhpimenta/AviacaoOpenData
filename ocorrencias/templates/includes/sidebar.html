@@ -9,12 +9,14 @@
         <li class="treeview">
           <a href="#">
             <i class="fa fa-area-chart"></i> 
-            <span>Ocorrencias</span>
+            <span>Ocorrências</span>
             <span class="fa fa-angle-left pull-right"></span>
           </a>
           <ul class="treeview-menu">
+            <li><a href="{% url 'ocorrencias.views.page_ocorrencias_geral' %}"><i class="fa fa-caret-right"></i> Geral</a></li>
             <li><a href="{% url 'ocorrencias.views.page_ocorrencias_por_estado' %}"><i class="fa fa-caret-right"></i> Por Estado</a></li>
             <li><a href="{% url 'ocorrencias.views.page_por_tipo_aeronave' %}"><i class="fa fa-caret-right"></i> Por Tipo de Aeronave</a></li>
+            <li><a href="#"><i class="fa fa-caret-right"></i> Por Tipo de Ocorrência</a></li>
           </ul>
         </li>            
         <li>

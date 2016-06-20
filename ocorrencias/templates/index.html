@@ -16,25 +16,7 @@
 <section class="content">
   <div class="row">   
   	<div class="col-md-6">
-      	<!-- BAR CHART -->
-          <div class="box box-success">
-            <div class="box-header with-border">
-              <h3 class="box-title">Numero de Ocorrencias nos Ultimos 10 anos</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <div class="box-body">
-              <div class="chart">
-                <canvas id="barChart" style="height:230px"></canvas>
-              </div>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
+      	
   	</div>
   </div> <!-- /.row -->     
 </section>
@@ -44,52 +26,6 @@
 
 {% block scripts %}
 <script type="text/javascript">
-
-$(function() {
-
-	$.getJSON('/ocorrencias/ano')
-		.done(function(data) {
-			console.log(data);
-			//-------------
-		    //- BAR CHART -
-		    //-------------
-
-		    var areaChartData = {
-		      labels: data.anos,
-		      datasets: [
-		        {
-		          label: "Acidentes",
-		          backgroundColor: "rgba(212,34,21,0.8)",
-	              borderColor: "rgba(212,34,21,1)",
-	              borderWidth: 1,
-	              hoverBackgroundColor: "rgba(212,34,21,1)",
-	              hoverBorderColor: "rgba(212,34,21,1)",
-		          data: data.quant_acidentes
-		        },
-		        {
-		        	label: "Incidentes Graves",
-		        	backgroundColor: "rgba(212,107,21,0.8)",
-		            borderColor: "rgba(212,107,21,1)",
-		            borderWidth: 1,
-		            hoverBackgroundColor: "rgba(212,107,21,1)",
-		            hoverBorderColor: "rgba(212,107,21,1)",
-			        data: data.quant_incidentes_graves
-		        }    
-		      ]
-		    };
-
-		    var barChartCanvas = $("#barChart").get(0).getContext("2d");
-		    var barChart = new Chart(barChartCanvas, {
-		    	type: 'bar',
-		    	data: areaChartData,
-		    	options: {}
-		    });
-		    
-		})
-		.fail(function() {
-			console.log("Falha na operação");
-		});
-});
 </script>
 
 {% endblock %}

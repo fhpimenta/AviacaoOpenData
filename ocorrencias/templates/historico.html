@@ -4,7 +4,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Histórico de Ocorrencias
+    Histórico de Ocorrências
     <!-- <small>Control panel</small> -->
   </h1>      
 </section>
@@ -108,22 +108,24 @@
 			  <table id="example1" class="table table-bordered table-striped">
 			    <thead>
 			    <tr>
-			      <th>Código</th>
-			      <th>Classificacao</th>
-			      <th>Tipo</th>
-			      <th>Localidade</th>
-			      <th>Estado</th>
-			      <th>Dia da Ocorrência</th>
+		    		<th>Código</th>
+			      	<th>Classificação</th>
+			      	<th>Tipo</th>
+			      	<th>Localidade</th>
+			      	<th>Estado</th>
+			      	<th>Dia da Ocorrência</th>
+			      	<th style="width:20px">Opções</th>
 			    </tr>
 			    </thead>            
 			    <tfoot>
 			    <tr>
-			      <th>Código</th>
-			      <th>Classificacao</th>
-			      <th>Tipo</th>
-			      <th>Localidade</th>
-			      <th>Estado</th>
-			      <th>Dia da Ocorrência</th>
+				    <th>Código</th>
+				    <th>Classificacao</th>
+				    <th>Tipo</th>
+				    <th>Localidade</th>
+				    <th>Estado</th>
+				    <th>Dia da Ocorrência</th>
+				    <th>Opções</th>
 			    </tr>
 			    </tfoot>
 			  </table>
@@ -176,7 +178,10 @@
 	      		table.destroy();
 	      		table = $("#example1").DataTable({
 	      			data: dataResponse.data,
-	      			destroy: true
+	      			destroy: true,
+	      			columnDefs: [
+	      				{targets: [6], orderable: false}
+	      			]	      			
 	      		});
 	      	});
       	}

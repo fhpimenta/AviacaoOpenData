@@ -28,9 +28,9 @@
           <div class="tab-pane active" id="geral">
             <div class="row">
                 <div class="col-md-12">
-                  <div class="box" id="boxBarChartGeral">
+                  <div class="box box-success box-solid" id="boxBarChartGeral">
                     <div class="box-header with-border">
-                      <h3 class="box-title">Numero de Ocorrencias nos Ultimos 10 anos</h3>
+                      <h3 class="box-title">Percentagem de Ocorrências por Estado (2006-2015)</h3>
 
                       <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -130,7 +130,7 @@
                 <div class="col-md-12">
                   <div class="box hidden" id="boxBarChart">
                     <div class="box-header with-border">
-                      <h3 class="box-title">Numero de Ocorrencias nos Ultimos 10 anos</h3>
+                      <h3 class="box-title"></h3>
 
                       <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -178,7 +178,13 @@
     var barChartLocalizar = null;
     $("#btnLocalizar").click(function() {
       var state = $('#uf').val();
+      var nameState = $('#uf option:selected').text();
       $('#boxBarChart').removeClass('hidden');
+
+      $('#boxBarChart .box-title').each(function() {
+        $(this).empty();
+        $(this).append("Quantidade de Ocorrências - "+nameState+" (2006-2015)");
+      });
       
       if(barChartLocalizar != null) {
         barChartLocalizar.destroy();
@@ -230,17 +236,25 @@
 
     // Grafico Geral de Acidentes por estado
     $.getJSON('/ocorrencias/async/geral/estados', function(retorno) {
+      var estados = new Array();
+      var arrData = new Array();
+
+      for(i=0; i < retorno.length; i++) {
+          estados.push(retorno[i][0]);
+          arrData.push(retorno[i][1]);
+        }
+
       var barChartData = {
-        labels: retorno.estados,
+        labels: estados,
         datasets: [
           {
             label: 'Ocorrências',
-            backgroundColor: "rgba(212,34,21,0.8)",
-            borderColor: "rgba(212,34,21,1)",
+            backgroundColor: "rgba(0,166,90,0.8)",
+            borderColor: "rgba(0,166,90,1)",
             borderWidth: 1,
-            hoverBackgroundColor: "rgba(212,34,21,1)",
-            hoverBorderColor: "rgba(212,34,21,1)",
-            data: retorno.quant
+            hoverBackgroundColor: "rgba(0,166,90,1)",
+            hoverBorderColor: "rgba(0,166,90,1)",
+            data: arrData
           }
         ]
       };

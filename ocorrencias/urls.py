@@ -7,6 +7,7 @@ urlpatterns = [
 	url(r'^ocorrencias/aeronave$', views.page_por_tipo_aeronave),	
 	url(r'^ocorrencias/historico$', views.page_historico),
 	url(r'^ocorrencias/estado$', views.page_ocorrencias_por_estado),
+	url(r'^ocorrencias/geral$', views.page_ocorrencias_geral),
 
 	# urls async
 	url(r'^ocorrencias/async/historico$', views.get_ocorrencias_historico),
