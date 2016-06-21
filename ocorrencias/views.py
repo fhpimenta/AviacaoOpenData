@@ -68,6 +68,9 @@ def page_historico(request):
 	ocorrencias = Ocorrencia.objects.all()
 	return render(request, 'historico.html', {'ocorrencias': ocorrencias})
 
+def page_tipos_ocorrencia(request):
+	return render(request, 'ocorrencias_tipo.html', {})
+
 def get_ocorrencias_historico(request):
 
 	ocorrencias = Ocorrencia.objects.all()	
@@ -177,6 +180,46 @@ def get_relatorio_ocorrencias_estados(request):
 	#retorno['estados'] = arrEstados
 	#retorno['quant'] = arrQuant
 	retorno = sort_dict(retorno)
+
+	return JsonResponse(retorno, safe=False)
+
+def get_relatorio_tipos_ocorrencia(request):
+	ocorrencias = Ocorrencia.objects.order_by('tipo')	
+
+	tipo = ocorrencias[0].tipo
+	quant = 0
+	total = 0
+	resultado = {}
+
+	for oc in ocorrencias:
+		total += 1	
+		if oc.tipo != tipo:
+			resultado[tipo] = quant
+			tipo = oc.tipo
+			quant = 1
+		else:
+			quant += 1
+
+	resultado = sort_dict(resultado)
+
+	retorno = {}
+	i = 0
+	n = 0
+	for key,value in resultado:
+		if(i < 15):
+			percent = percentagem(value, total)
+			percent = Decimal(str(percent)).quantize(Decimal('1.0'))
+			retorno[key] = float(percent)
+		else:
+			n += value
+
+		i += 1
+
+	retorno = sort_dict(retorno)
+
+	percent = percentagem(n, total)
+	percent = Decimal(str(percent)).quantize(Decimal('1.0'))
+	retorno.append(["OUTROS", float(percent)])	
 
 	return JsonResponse(retorno, safe=False)
 

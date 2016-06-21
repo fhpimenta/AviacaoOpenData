@@ -1,13 +1,11 @@
 {% extends 'layouts/base.html' %}
 
-{% block title %}Acidentes Aereos{% endblock %}
-
 {% block content %}   
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Dados Estatísticos por Tipo de Aeronave
+    Dados Estatísticos por Tipo de Ocorrência
     <!-- <small>Control panel</small> -->
   </h1>      
 </section>
@@ -19,7 +17,7 @@
         <!-- BAR CHART -->
           <div class="box box-warning box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title">Percentual de Ocorrências (%) por Tipo de Aeronave</h3>
+              <h3 class="box-title">Percentual de Ocorrências (%) por Tipo</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -45,7 +43,7 @@
 {% block scripts %}
 <script type="text/javascript">
   $(function() {
-    $.getJSON('/ocorrencias/async/aeronave')
+    $.getJSON('/ocorrencias/async/tipos')
       .done(function(result) {    
         // Chart JS
         label = new Array();

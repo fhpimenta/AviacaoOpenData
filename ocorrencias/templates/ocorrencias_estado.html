@@ -1,7 +1,5 @@
 {% extends 'layouts/base.html' %}
 
-{% block title %}Acidentes Aereos{% endblock %}
-
 {% block content %}   
 
 <!-- Content Header (Page header) -->
@@ -30,7 +28,7 @@
                 <div class="col-md-12">
                   <div class="box box-success box-solid" id="boxBarChartGeral">
                     <div class="box-header with-border">
-                      <h3 class="box-title">Percentagem de Ocorrências por Estado (2006-2015)</h3>
+                      <h3 class="box-title">Percentagem de Ocorrências Aeronáuticas (%) por Estado (2006-2015)</h3>
 
                       <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -248,7 +246,7 @@
         labels: estados,
         datasets: [
           {
-            label: 'Ocorrências',
+            label: 'Percentual (%)',
             backgroundColor: "rgba(0,166,90,0.8)",
             borderColor: "rgba(0,166,90,1)",
             borderWidth: 1,
