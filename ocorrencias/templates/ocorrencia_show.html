@@ -1,1 +1,128 @@
-{{ ocorrencia }}
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Histórico de Ocorrência - #{{ ocorrencia.codigo_ocorrencia }}
+  </h1>      
+</section>
+<!-- /.content-header -->
+
+<section class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<!-- Box Ocorrencia -->
+			<div class="box box-success box-solid">
+
+				<div class="box-header with-border">
+					<h3 class="box-title">Dados da Ocorrência</h3>
+					<div class="box-tools pull-right">
+		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+		                </button>
+		                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+	              	</div>
+	              	<!-- /.box-tools -->
+				</div>
+				<!-- /.box-header -->
+
+				<div class="box-body">
+					<p><strong>Classificacao: </strong>{{ ocorrencia.classificacao }}</p>
+					<p><strong>Tipo: </strong>{{ ocorrencia.tipo }}</p>
+					<p><strong>Localidade: </strong>{{ ocorrencia.localidade }}</p>
+					<p><strong>Estado: </strong>{{ ocorrencia.uf }}</p>
+					<p><strong>País: </strong>{{ ocorrencia.pais }}</p>
+					<p><strong>Dia da Ocorrência: </strong>{{ ocorrencia.dia_ocorrencia|date:"d/m/Y" }}</p>
+					<p><strong>Status da Investigação: </strong>{{ ocorrencia.status_investigacao }}</p>
+				</div>
+				<!-- /.box-body -->
+			</div>
+			<!-- /.box -->
+
+			<!-- Box Aeronaves -->
+			<div class="box box-success box-solid">
+
+				<div class="box-header with-border">
+					<h3 class="box-title">Aeronaves Envolvidas</h3>
+					<div class="box-tools pull-right">
+		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+		                </button>
+		                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+	              	</div>
+	              	<!-- /.box-tools -->
+				</div>
+				<!-- /.box-header -->
+
+				<div class="box-body">
+					<table class="table table-responsive">
+						<tbody>
+							{% for av in aeronaves %}
+								<tr>
+									<td>
+										<h4><strong>Aeronave #{{ forloop.counter0|add:"1" }} - Cod: {{ av.codigo_aeronave }}</strong></h4>
+										<p><strong>Matrícula: </strong>{{ av.matricula }}</p>
+										<p><strong>Equipamento: </strong>{{ av.equipamento }}</p>
+										<p><strong>Fabricante: </strong>{{ av.fabricante }}</p>
+										<p><strong>Modelo: </strong>{{ av.modelo }}</p>
+										<p><strong>Tipo de Motor: </strong>{{ av.tipo_motor }}</p>
+										<p><strong>Quantidade de Motores: </strong>{{ av.quantidade_motores }}</p>
+										<p><strong>Ano de Fabricação: </strong>{{ av.ano_fabricacao }}</p>
+										<p><strong>País de Registro: </strong>{{ av.pais_registro }}</p>
+									</td>
+								</tr>								
+							{% endfor %}
+						</tbody>
+					</table>
+					<!-- /.table -->
+				</div>
+				<!-- /.box-body -->
+			</div>
+			<!-- /.box -->
+
+			<!-- Box Fatores -->
+			<div class="box box-success box-solid">
+
+				<div class="box-header with-border">
+					<h3 class="box-title">Fatores Contribuintes</h3>
+					<div class="box-tools pull-right">
+		                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+		                </button>
+		                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+	              	</div>
+	              	<!-- /.box-tools -->
+				</div>
+				<!-- /.box-header -->
+
+				<div class="box-body">
+					<table class="table table-responsive">
+						<tbody>
+							{% for fator in fatores %}
+								<tr>
+									<td>
+										<h4><strong>Fator #{{ forloop.counter0|add:"1" }}</strong></h4>
+										<p><strong>Fator: </strong>{{ fator.fator }}</p>
+										<p><strong>Aspecto: </strong>{{ fator.aspecto }}</p>
+										<p><strong>Area: </strong>{{ fator.area }}</p>
+										{% if fator.detalhe_fator == none %}
+											<p><strong>Detalhe do Fator: </strong> --- </p>
+										{% else %}
+											<p><strong>Detalhe do Fator: </strong>{{ fator.detalhe_fator }}</p>
+										{% endif %}
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					<!-- /.table -->
+				</div>
+				<!-- /.box-body -->
+			</div>
+			<!-- /.box -->
+		</div>
+		<!-- /.col -->
+	</div>
+	<!-- /.row -->
+</section>
+<!-- /.content -->
+{% endblock content %}

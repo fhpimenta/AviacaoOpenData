@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.core import serializers
-from .models import Ocorrencia, Aeronave
+import urllib.request
+import json
+from .models import Ocorrencia, Aeronave, FatorContribuinte
 from decimal import *
 
 # Create your views here.
@@ -180,7 +182,13 @@ def get_relatorio_ocorrencias_estados(request):
 
 def show_ocorrencia(request, codigo):
 	ocorrencia = Ocorrencia.objects.get(pk=codigo)
-	return render(request, 'ocorrencia_show.html', {'ocorrencia': ocorrencia})
+	aeronaves = Aeronave.objects.filter(codigo_ocorrencia=codigo)
+	fatores = FatorContribuinte.objects.filter(codigo_ocorrencia=codigo)
+	#url = "http://ocorrencias-aviacao-api.herokuapp.com/api/ocorrencias/"+str(codigo)
+	#print(url)
+	#response = urllib.request.urlopen(url).read()
+	#ocorrencia = json.loads(response.decode('utf-8'))
+	return render(request, 'ocorrencia_show.html', {'ocorrencia': ocorrencia, 'aeronaves': aeronaves, 'fatores': fatores})
 
 def percentagem(valor, total):
 	return float((valor*100)/total)
