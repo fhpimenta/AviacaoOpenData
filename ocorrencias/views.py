@@ -65,38 +65,43 @@ def ocorrencias_por_tipo_aeronave(request):
 	return JsonResponse(retorno, safe=False)
 
 def page_historico(request):
-	ocorrencias = Ocorrencia.objects.all()
-	return render(request, 'historico.html', {'ocorrencias': ocorrencias})
+	return render(request, 'historico.html', {})
 
 def page_tipos_ocorrencia(request):
 	return render(request, 'ocorrencias_tipo.html', {})
 
 def get_ocorrencias_historico(request):
 
-	ocorrencias = Ocorrencia.objects.all()	
+	ocorrencias = Ocorrencia.objects.all()
+	
+	retorno = {'data':[]}
+	print(ocorrencias)
+	for oc in ocorrencias:
+		linha = []
+		linha = [oc.codigo_ocorrencia,oc.classificacao,oc.tipo,oc.localidade,oc.uf, "{:%d/%m/%Y}".format(oc.dia_ocorrencia)]
+		linha.append('<a class="btn btn-primary" href="/ocorrencias/show/'+str(oc.codigo_ocorrencia)+'"><i class="fa fa-eye"></i></a>')		
+		retorno['data'].append(linha)
+		
 
-	if request.method == 'POST':
-		estado = request.POST['uf']
-		ano = int(request.POST['ano'])
-		if request.POST['uf'] != 0:
-			ocorrencias = ocorrencias.filter(uf=estado)
-		if request.POST['ano'] != 0:
-			ocorrencias = ocorrencias.filter(dia_ocorrencia__year=ano)
+	return JsonResponse(retorno, safe=False)
+
+def get_search_historico(request):
+	estado = request.GET['uf']
+	ano = int(request.GET['ano'])
+
+	ocorrencias = Ocorrencia.objects.all()
+
+	if estado != 0:
+		ocorrencias = ocorrencias.filter(uf=estado)
+	if ano != 0:
+		ocorrencias = ocorrencias.filter(dia_ocorrencia__year=ano)
 
 	retorno = {'data':[]}
 	print(ocorrencias)
 	for oc in ocorrencias:
 		linha = []
 		linha = [oc.codigo_ocorrencia,oc.classificacao,oc.tipo,oc.localidade,oc.uf, "{:%d/%m/%Y}".format(oc.dia_ocorrencia)]
-		linha.append('<a class="btn btn-primary" href="/ocorrencias/show/'+str(oc.codigo_ocorrencia)+'"><i class="fa fa-eye"></i></a>')
-		#linha = {}
-		#linha['codigo'] = oc.codigo_ocorrencia
-		#linha['classificacao'] = oc.classificacao
-		#linha['tipo'] = oc.tipo
-		#linha['localidade'] = oc.localidade
-		#linha['estado'] = oc.estado
-		#linha['diaDaOcorrencia'] = "{:%d/%m/%Y}".format(oc.dia_ocorrencia)
-		#linha['opcoes'] = "<a class='btn btn-primary' href='#'></a>"
+		linha.append('<a class="btn btn-primary" href="/ocorrencias/show/'+str(oc.codigo_ocorrencia)+'"><i class="fa fa-eye"></i></a>')		
 		retorno['data'].append(linha)
 		
 
